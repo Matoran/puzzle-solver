@@ -4,7 +4,6 @@
 #include <QTextStream>
 #include <QVector>
 #include <QPoint>
-#define EMPTY 9
 
 
 class PuzzleState
@@ -48,6 +47,5 @@ inline uint qHash(const PuzzleState &puzzle)
 {
     return qHash(puzzle.getPuzzle());
 }
-
 
 #endif // PUZZLESTATE_H

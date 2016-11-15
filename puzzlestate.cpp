@@ -151,7 +151,6 @@ PuzzleState *PuzzleState::swap(int pos){
     state->puzzle.replace(pos, this->size*this->size);
     state->position.setX(pos % this->size);
     state->position.setY(pos / this->size);
-    //state->display();
     return state;
 
 }

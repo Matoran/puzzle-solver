@@ -18,7 +18,6 @@
 int main() {
     QTextStream cin(stdin);
     QTextStream cout(stdout);
-
     cout << "enter size of puzzle" << endl;
     int size(0);
     cin >> size;
