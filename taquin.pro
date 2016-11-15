@@ -10,7 +10,9 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    puzzlestate.cpp
+    puzzlestate.cpp \
+    puzzlesolver.cpp
 
 HEADERS += \
-    puzzlestate.h
+    puzzlestate.h \
+    puzzlesolver.h

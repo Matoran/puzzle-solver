@@ -4,29 +4,50 @@
 #include <QTextStream>
 #include <QVector>
 #include <QPoint>
+#define EMPTY 9
 
 
 class PuzzleState
 {
 public:
+    PuzzleState();
     PuzzleState(int size, PuzzleState *parent = nullptr);
     ~PuzzleState();
     void configure();
     void display() const;
-    bool find(const PuzzleState &final);
-    PuzzleState* left();
-    PuzzleState* right();
-    PuzzleState* top();
-    PuzzleState* bottom();
+    PuzzleState *getLeft();
+    PuzzleState *getRight();
+    PuzzleState *getTop();
+    PuzzleState *getBottom();
+    QVector<int> getPuzzle() const;
+    PuzzleState *getParent() const;
+    int getSize() const;
+    QPoint getPosition() const;
+    int badPlaced(const PuzzleState &final) const;
+    int manhattan(const PuzzleState &final) const;
+    void generateChildrens();
+
 private:
     int size;
     QPoint position;
-    PuzzleState *parent;
+    PuzzleState *parent = nullptr;
+    PuzzleState *leftChildren = nullptr;
+    PuzzleState *rightChildren = nullptr;
+    PuzzleState *topChildren = nullptr;
+    PuzzleState *bottomChildren = nullptr;
     QVector<int> puzzle;
-    QTextStream cin{stdin};
-    //QTextStream cout{stdout};
     PuzzleState *swap(int pos);
-    bool check(const PuzzleState &actual, const PuzzleState &final);
+
 };
+
+inline bool operator ==(PuzzleState s1, PuzzleState s2){
+    return s1.getPuzzle() == s2.getPuzzle();
+}
+
+inline uint qHash(const PuzzleState &puzzle)
+{
+    return qHash(puzzle.getPuzzle());
+}
+
 
 #endif // PUZZLESTATE_H
