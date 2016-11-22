@@ -360,7 +360,9 @@ bool PuzzleSolver::solveWithSavedStatesAndHeuristicManhattan(PuzzleState &start,
         states.insert(start);
         queue.insert(start.badPlaced(final), &start);
         //breadth first search
+        int i = 0;
         while (!queue.isEmpty()) {
+            i++;
             PuzzleState *actualState = queue.lowerBound(0).value();
             //generate all childrens of actual state and add thems to the queue
             actualState->generateChildrens();
@@ -382,6 +384,7 @@ bool PuzzleSolver::solveWithSavedStatesAndHeuristicManhattan(PuzzleState &start,
                 queue.lowerBound(0).value()->display();
                 return false;
             }
+            //std::cout << i << "count" << std::endl;
         }
         return false;
     }

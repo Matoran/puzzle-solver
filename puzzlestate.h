@@ -13,6 +13,7 @@ public:
     PuzzleState(int size, PuzzleState *parent = nullptr);
     ~PuzzleState();
     void configure();
+    void random();
     void display() const;
     PuzzleState *getLeft();
     PuzzleState *getRight();

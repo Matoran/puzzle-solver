@@ -73,6 +73,26 @@ void PuzzleState::configure()
 }
 
 /*
+ *  Configure puzzle with random values
+ *
+ *  return: void
+ */
+void PuzzleState::random()
+{
+    for (int position = 1; position <= this->size*this->size; ++position) {
+        this->puzzle << position;
+    }
+    std::random_shuffle(this->puzzle.begin(), this->puzzle.end());
+    for (int position = 0; position < this->size*this->size; ++position) {
+        if(this->puzzle.at(position) == size*size){
+            this->position.setX(position % this->size);
+            this->position.setY(position / this->size);
+            break;
+        }
+    }
+}
+
+/*
  *   Display the disposition of the puzzle
  *
  *   returns: void
@@ -207,8 +227,8 @@ int PuzzleState::manhattan(const PuzzleState &final) const
         for (int column = 0; column < this->size; ++column) {
             int value = this->puzzle.at(line*this->size+column);
             int index = final.getPuzzle().indexOf(value);
-            int lineFinal = index / 3;
-            int columnFinal = index % 3;
+            int lineFinal = index / this->size;
+            int columnFinal = index % this->size;
             cost += qAbs(line-lineFinal) + qAbs(column-columnFinal);
         }
     }

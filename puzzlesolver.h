@@ -14,7 +14,7 @@ public:
     PuzzleSolver();
     static bool solve(PuzzleState &start, const PuzzleState &final, Option option = automatic);
 private:
-    static const int LIMIT = 3e7;
+    static const int LIMIT = 1e8;
     static bool check(PuzzleState &actual, const PuzzleState &final);
     static bool addState(PuzzleState *state, const PuzzleState &final, QQueue<PuzzleState*> &queue, QSet<PuzzleState> &states);
     static bool addState(PuzzleState *state, const PuzzleState &final, QQueue<PuzzleState*> &queue);
@@ -26,5 +26,7 @@ private:
     static bool solveWithSavedStatesAndHeuristicManhattan(PuzzleState &start, const PuzzleState &final);
 
 };
+
+
 
 #endif // PUZZLESOLVER_H

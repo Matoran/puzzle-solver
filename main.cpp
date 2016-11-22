@@ -7,6 +7,8 @@
 #include <QQueue>
 #include <QTextStream>
 #include <QElapsedTimer>
+#include <iostream>
+#include <ctime>
 #include "puzzlestate.h"
 #include "puzzlesolver.h"
 
@@ -16,21 +18,31 @@
  *   returns: EXIT_SUCCESS
  */
 int main() {
+    std::srand ( unsigned ( std::time(0) ) );
     QTextStream cin(stdin);
     QTextStream cout(stdout);
     cout << "enter size of puzzle" << endl;
     int size(0);
     cin >> size;
     cout << size << "x" << size << endl;
+    int generate = 0;
+    cout << "autogenerate(0 = false, 1 = true)" << endl;
+    cin >> generate;
 
     PuzzleState initialPuzzle(size);
     cout << "enter initial state" << endl;
-    initialPuzzle.configure();
+    if(generate)
+        initialPuzzle.random();
+    else
+        initialPuzzle.configure();
     initialPuzzle.display();
 
     PuzzleState finalPuzzle(size);
     cout << "enter final state" << endl;
-    finalPuzzle.configure();
+    if(generate)
+        finalPuzzle.random();
+    else
+        finalPuzzle.configure();
     finalPuzzle.display();
     cout << "cases bad placed: " << initialPuzzle.badPlaced(finalPuzzle) << endl;
     cout << "Manhattan distance: " << initialPuzzle.manhattan(finalPuzzle) << endl;
